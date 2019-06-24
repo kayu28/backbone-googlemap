@@ -1,0 +1,14 @@
+.classpath
+.project
+.settings
+
+target
+build
+bin
+libs
+
+.gradle
+!gradle-wrapper.jar
+
+credentials.js
+*.log

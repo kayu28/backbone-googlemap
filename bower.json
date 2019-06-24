@@ -1,0 +1,20 @@
+{
+  "name": "backbone-googlemap",
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "dependencies": {
+    "requirejs": "#2.2.0",
+    "text": "requirejs-text#2.0.15",
+    "jquery": "jquery#2.2.4",
+    "bootstrap": "3.2.0",
+    "underscore": "#1.8.3",
+    "backbone": "backbone#1.2.3",
+    "backbone.marionette": "marionette#2.4.7",
+    "geolocation-marker": "#2.0.5",
+    "json2": "*"
+  }
+}

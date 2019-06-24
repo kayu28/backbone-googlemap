@@ -1,0 +1,8 @@
+<div id="myNav" class="overlay">
+	<a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
+	<div class="overlay-content">
+		{{#each locationList}}
+		<a href="#" id="{{ this.place_id }}" class="detail">{{ this.title }}</a>
+		{{/each}}
+	</div>
+</div>
