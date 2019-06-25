@@ -1,8 +1,22 @@
-<div id="myNav" class="overlay">
-	<a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
-	<div class="overlay-content">
-		{{#each locationList}}
-		<a href="#" id="{{ this.place_id }}" class="detail">{{ this.title }}</a>
-		{{/each}}
+<div class="container">
+	<div id="myNav" class="overlay">
+		<nav class="navbar navbar-light" id="markerCollectionHeader">
+			<div class="input-group">
+				<input class="form-control" value="{{ text }}" type="text" id="searchCriteria" placeholder="Search">
+				<span class="input-group-btn">
+					<button class="btn btn-default" id="searchBtn" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+					<button class="btn btn-default" id="closeNav" type="button">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
+		</nav>
+		<div class="overlay-content">
+			{{#each locationList}}
+			<a href="#" id="{{ this.place_id }}" class="detail">{{ this.title }}</a>
+			{{/each}}
+		</div>
 	</div>
 </div>

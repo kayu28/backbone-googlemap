@@ -19,7 +19,13 @@ define([
 			this.eventBus = options.eventBus;
 			_.bindAll(this, 'render', 'search', 'initMap', 'activate');
 			this.eventBus.on('search', this.search, this);
+			this.eventBus.on('searchList', this.searchList, this);
+			this.eventBus.on('initSearchCriteria', this.initSearchCriteria, this);
 			this.render();
+		},
+		initSearchCriteria: function (searchCriteria) {
+			console.log(searchCriteria);
+			this.searchCriteria = searchCriteria;
 		},
 		render: function () {
 			this.activate();
@@ -56,6 +62,7 @@ define([
 
 			var map = new google.maps.Map(this.el, mapOptions);
 			this.map = map;
+			this.autocomplete();
 
 			var userMarker = new UserMarkerView({
 				latlng: latlng,
@@ -72,28 +79,37 @@ define([
 
 			var menuControlDiv = document.getElementById('menu');
 			var $controlUI = $(menuControlDiv).children('img');
-			$controlUI.attr("src","images/menu.png");
+			$controlUI.attr("src", "images/menu.png");
 			menuControlDiv.index = 1;
 			this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(menuControlDiv);
 
 		},
-		search: function (event, searchCriteria) {
-			console.log('[views]nearbysearch::search...');
+		searchList: function (searchText) {
+			console.log('[views]map::searchList...');
+			this.searchCriteria.set({
+				text: searchText
+			});
+			this.search();
+		},
+		search: function (searchCriteria) {
+			console.log('[views]map::search...');
 			var _this = this;
+			this.searchCriteria = searchCriteria  || this.searchCriteria;
+			// this.searchCriteria = searchCriteria;
 			var pos = this.map.getCenter();
 			var latlng = new google.maps.LatLng(pos.lat(), pos.lng());
 			var service = new google.maps.places.PlacesService(this.map);
 			var parameters = {
 				location: latlng,
-				keyword: searchCriteria,
+				keyword: _this.searchCriteria.get('text'),
 				type: 'cafe',
 				bounds: this.map.getBounds(),
 				// rankBy: google.maps.places.RankBy.DISTANCE
 			};
 			service.nearbySearch(parameters,
 				function (results, status, pagination) {
-					if (status !== 'OK') return;
-					console.log(results.length);
+					// if (status === 'ZERO_RESULT'){
+					// }
 					console.log(JSON.stringify(results, null, "\t"));
 					var locationList = new LocationCollection(results);
 					if (_this.markerCollectionView) {
@@ -102,12 +118,38 @@ define([
 						_this.markerCollectionView = new MarkerCollectionView({
 							collection: locationList,
 							map: _this.map,
-							eventBus : _this.eventBus,
+							eventBus: _this.eventBus,
 							el: $("#markerList"),
 						});
 					}
 					_this.markerCollectionView.render();
 				});
+		},
+		autocomplete: function () {
+			var _this = this;
+			var inputText = document.getElementById('autocomplete');
+			var autocompleteOptions = {
+				// bounds : bounds, // 範囲優先検索
+				componentRestrictions: {
+					country: 'jp'
+				}
+			};
+			var autocomplete = new google.maps.places.Autocomplete(
+				inputText, autocompleteOptions);
+			autocomplete.bindTo('bounds', _this.map);
+			autocomplete.setFields(['address_components', 'geometry', 'icon',
+				'name']);
+			autocomplete.addListener('place_changed', function () {
+				console.log('[views]map::place_changed...');
+				var place = autocomplete.getPlace();
+				if (place.geometry.viewport == undefined) {
+					_this.map.setCenter(place.geometry.location);
+					_this.map.setZoom(12);
+				} else {
+					_this.map.fitBounds(place.geometry.viewport);
+				}
+				_this.search();
+			});
 		},
 		geolocationFail: function (error) {
 			// TODO

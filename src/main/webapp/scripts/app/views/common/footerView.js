@@ -9,31 +9,33 @@ define([
 	var FooterView = Backbone.View.extend({
 		model: SearchCriteria,
 		events: {
-			"click button#searchBtn": "search",
 			"click #customerBtn": "changeCustomerMode",
 			"click #meetingAreaBtn": "changeMeetingAreaMode",
 			"click #doctorBtn": "changeDoctorMode"
 		},
 		initialize: function (options) {
 			console.log('[views]footer::initialize...');
-			this.eventBus = options.eventBus;
 			this.render();
+			this.eventBus = options.eventBus;
+			this.initSearchCriteria();
 		},
-		search: function () {
-			console.log('[views]footer::initialize...');
-			this.eventBus.trigger('search', $("#searchCriteria").val());
+		initSearchCriteria: function () {
+			this.eventBus.trigger('initSearchCriteria', this.model);
 		},
 		changeCustomerMode: function () {
 			console.log('[views]footer::changeCustomerMode...');
 			this.model.changeCustomerMode();
+			this.initSearchCriteria();
 		},
 		changeMeetingAreaMode: function () {
 			console.log('[views]footer::changeMeetingAreaMode...');
 			this.model.changeMeetingAreaMode();
+			this.initSearchCriteria();
 		},
 		changeDoctorMode: function () {
 			console.log('[views]footer::changeDoctorMode...');
 			this.model.changeDoctorMode();
+			this.initSearchCriteria();
 		},
 		render: function () {
 			console.log('[views]footer::render...');

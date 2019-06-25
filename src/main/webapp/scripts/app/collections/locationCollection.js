@@ -1,4 +1,4 @@
-define(['backbone', 'app/models/locationModel'], function (Backbone, Location) {
+define(['backbone', 'app/models/location'], function (Backbone, Location) {
 	'use strict';
 	console.log('[collections]location::loading...');
 

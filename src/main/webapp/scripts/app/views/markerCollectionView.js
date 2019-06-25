@@ -1,12 +1,13 @@
 define([
 	'backbone',
-	'app/views/markerView',
+	'app/views/meetingMarkerView',
 	'hbs!app/templates/markerCollection'
-], function (Backbone, MarkerView, hbsView) {
+], function (Backbone, MeetingMarkerView, hbsView) {
 	'use strict';
 
 	var MarkerCollectionView = Backbone.View.extend({
 		events: {
+			"click button#searchBtn": "search",
 			"click #closeNav": "closeNav",
 			"click .detail": "showDetail"
 		},
@@ -22,6 +23,11 @@ define([
 			this.listenTo(this.collection, "add", this.addItemView);
 			this.on('reset', this.reset, this);
 			this.eventBus.on('list', this.openNav, this);
+		},
+		search: function () {
+			console.log('[views]markerList::search...');
+			this.eventBus.trigger('searchList', $('#searchCriteria').val());
+			document.getElementById("myNav").style.width = "0%";
 		},
 		closeNav: function () {
 			console.log('[views]markerList::closeNav...');
@@ -52,7 +58,7 @@ define([
 		},
 		addItemView: function (item) {
 			console.log('[views]markerList::addItemView...');
-			var markerView = new MarkerView({
+			var markerView = new MeetingMarkerView({
 				model: item,
 				map: this.map
 			});

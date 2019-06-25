@@ -77,17 +77,14 @@ div#content {
 	z-index: 1;
 	left: 0;
 	top: 0;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.9);
+	background-color: rgba(255, 255, 255, 1);
 	overflow-x: hidden;
-	transition: 0.5s;
+	/* transition: 1.0s; */
 }
 
 /* Position the content inside the overlay */
-
 .overlay-content {
 	position: relative;
-	top: 25%;
 	width: 100%;
 }
 
@@ -95,11 +92,7 @@ div#content {
 	padding: 8px;
 	text-decoration: none;
 	font-size: 20px;
-	color: #818181;
 	display: block;
-	/* Display block instead of inline */
-	transition: 0.3s;
-	/* Transition effects on hover (color) */
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -111,10 +104,8 @@ div#content {
 /* Position the close button (top right corner) */
 
 .overlay .closebtn {
-	position: absolute;
-	top: 20px;
 	right: 45px;
-	font-size: 60px;
+	font-size: 30px;
 }
 
 /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
