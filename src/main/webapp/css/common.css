@@ -41,7 +41,7 @@ body {
 	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
-	height: 60px;
+	height: 100px;
 	background-color: #1b1b1b;
 	padding: 20px;
 }
@@ -52,7 +52,7 @@ div#content {
 }
 
 #googleMapBox {
-	height:calc(100vh - 60px);
+	height: calc(100vh - 100px);
 	width: 100%;
 }
 
@@ -128,4 +128,20 @@ div#content {
 		top: 15px;
 		right: 35px;
 	}
+}
+
+#infoWindowText {
+	background-color: #fff;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+	width: 100%;
+	cursor: pointer;
+	float: left;
+	text-align: center;
+	color: rgb(25, 25, 25);
+	font-size: 15px;
+	line-height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
 }

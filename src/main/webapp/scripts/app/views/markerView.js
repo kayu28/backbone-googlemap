@@ -24,29 +24,30 @@ define(['backbone'], function (Backbone) {
 				title: this.model.get('title'),
 				icon: icon
 			});
-			this.infowindow = new google.maps.InfoWindow();
-			this.infowindow.setContent(document.getElementById('infowindow-content'));
-			var address = '';
-			var address_components = _this.model.get('address_components');
-			if (address_components && address_components.length != 0) {
-				address = [
-					(address_components[0] && address_components[0].short_name || ''),
-					(address_components[1] && address_components[1].short_name || ''),
-					(address_components[2] && address_components[2].short_name || '')
-				].join(' ');
-			}
-			this.infowindow.setContent('<div><strong>' + _this.model.get('title') + '</strong><br>' + address);
+
+			var infoWindow = document.createElement('div');
+			var infoWindowText = document.createElement('div');
+			infoWindowText.id = 'infoWindowText';
+			infoWindowText.innerHTML = this.model.get('title');
+			infoWindow.appendChild(infoWindowText);
+			infoWindow.index = 1;
+			infoWindow.style['padding-bottom'] = '10px';
+			infoWindow.style['width'] = '90%';
+			this.infoWindow = infoWindow;
 
 			google.maps.event.addListener(this.marker, 'click', function (e) {
-				_this.infowindow.open(this.map, _this.marker);
-				this.map.setCenter(e.latLng);
+				_this.openInfoWindow(e);
 			});
 		},
-		onDelete:function () {
+		openInfoWindow: function (event) {
+			this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].clear();
+			this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(this.infoWindow);
+		},
+		onDelete: function () {
 			console.log('[views]marker::onDelete...  ');
 			this.model.destroy();
 		},
-		onDestroy:function () {
+		onDestroy: function () {
 			console.log('[views]marker::onDestroy...  ');
 			this.marker.setMap(null);
 			this.remove();
