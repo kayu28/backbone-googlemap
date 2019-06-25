@@ -1,10 +1,21 @@
 <div class="container">
 	<div class="input-group">
-		<input class="form-control" type="search" id="searchCriteria" placeholder="Search">
+		<input class="form-control" value="{{ text }}" type="text" id="searchCriteria" placeholder="Search">
 		<span class="input-group-btn">
 			<button class="btn btn-default" id="searchBtn" type="button">
 				<span class="glyphicon glyphicon-search"></span>
 			</button>
 		</span>
+	</div>
+	<div class="btn-group" data-toggle="buttons">
+		<label id="customerBtn" class="btn btn-default">
+			<input type="checkbox" autocomplete="off"> 顧客
+		</label>
+		<label id="meetingAreaBtn" class="btn btn-default active">
+			<input type="checkbox" autocomplete="off"> 場所
+		</label>
+		<label id="doctorBtn" class="btn btn-default">
+			<input type="checkbox" autocomplete="off"> 嘱託医
+		</label>
 	</div>
 </div>

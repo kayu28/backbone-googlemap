@@ -1,9 +1,10 @@
 define([
 	'backbone',
+	'app/models/searchCriteria',
 	'app/views/common/headerView',
 	'app/views/mapView',
 	'app/views/common/footerView'
-], function (Backbone, HeaderView, MapView, FooterView) {
+], function (Backbone, SearchCriteria, HeaderView, MapView, FooterView) {
 	'use strict';
 	console.log('[views]app::loading...');
 
@@ -19,8 +20,10 @@ define([
 				el: $("#googleMapBox"),
 				eventBus : this.eventBus
 			});
+			var searchCriteria = new SearchCriteria();
 			this.footerView = new FooterView({
 				el: $("#footer"),
+				model: searchCriteria,
 				eventBus : this.eventBus
 			});
 			console.log('[views]app::initialize...*** end');
