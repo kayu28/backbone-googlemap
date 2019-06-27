@@ -4,20 +4,18 @@ define([
 ], function (Backbone, MarkerView) {
 	'use strict';
 
-	var MeetingMarkerView = MarkerView.extend({
+	var DoctorMarkerView = MarkerView.extend({
 		constructor: function (options) {
-			console.log('[views]meetingMarker::initialize...');
+			console.log('[views]doctorMarker::initialize...');
 			var _this = this;
 			this.options = options;
-			this.model = options.model;
 			// this.map = options.map;
 			MarkerView.prototype.constructor.apply(this, arguments);
 			_.bindAll(this, 'render');
-			this.listenTo(this.model, "destroy", this.onDestroy);
 
 			var svg = [
 				'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="25px" height="25px">',
-				'<path d="M37 7h-28v27c0 2.2 1.8 4 4 4h20c2.2 0 4-1.8 4-4v-5c6.076 0 11-4.925 11-11s-4.924-11-11-11zm0 17v-12c3.314 0 6 2.686 6 6 0 3.313-2.686 6-6 6zm-35 16v2.301c0 1.896 2.069 2.699 4.6 2.699h36.8c2.53 0 4.6-.803 4.6-2.699v-2.301h-46z"/>',
+				'<path d="M42.924 13h-4.924v-5.226c0-3.736-2.948-6.774-6.694-6.774h-12.611c-3.748 0-6.695 3.038-6.695 6.774v5.226h-4.925c-3.356 0-6.075 2.591-6.075 5.937v23.007c0 3.345 2.719 6.056 6.075 6.056h35.849c3.355 0 6.076-2.711 6.076-6.057v-23.006c0-3.346-2.721-5.937-6.076-5.937zm-26.924-5.226c0-1.399 1.292-2.774 2.695-2.774h12.611c1.399 0 2.694 1.375 2.694 2.774v5.226h-18v-5.226zm20 27.226h-7v7h-8v-7h-7v-8h7v-7h8v7h7v8z"/>',
 				'</svg>'].join('\n');
 			var icon = {
 				url: 'data:image/svg+xml;charset=UTF-8;base64,' + btoa(svg)
@@ -25,7 +23,7 @@ define([
 
 			this.marker = new google.maps.Marker({
 				map: this.map_obj,
-				position: this.model.getLatLng(),
+				position: this.options.latlng,
 				title: this.model.get('name'),
 				icon: icon
 			});
@@ -33,7 +31,7 @@ define([
 			var infoWindow = document.createElement('div');
 			var infoWindowText = document.createElement('div');
 			infoWindowText.id = 'infoWindowText';
-			infoWindowText.innerHTML = this.model.get('name');
+			infoWindowText.innerHTML = this.model.get('title');
 			infoWindow.appendChild(infoWindowText);
 			infoWindow.index = 1;
 			infoWindow.style['padding-bottom'] = '10px';
@@ -44,6 +42,10 @@ define([
 				_this.openInfoWindow(e);
 			});
 		},
+		render: function () {
+			console.log('[views]doctorMarker::render...  ');
+			return this;
+		},
 	});
-	return MeetingMarkerView;
+	return DoctorMarkerView;
 });

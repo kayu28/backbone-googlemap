@@ -1,17 +1,21 @@
-define(['backbone'], function (Backbone) {
+define([
+	'backbone',
+	'app/views/markerView'
+], function (Backbone, MarkerView) {
 	'use strict';
 
-	var UserMarkerView = Backbone.View.extend({
+	var UserMarkerView = MarkerView.extend({
 		constructor: function (options) {
 			console.log('[views]userMarker::initialize...');
 			var _this = this;
 			this.options = options;
-			this.map = options.map;
+			this.map_obj = options.map_obj;
 			Backbone.View.prototype.constructor.apply(this, arguments);
 			_.bindAll(this, 'render');
+
 			this.userMarker = new google.maps.Marker({
 				position: this.options.latlng,
-				map: this.map,
+				map: this.map_obj,
 				icon: {
 					path: google.maps.SymbolPath.CIRCLE,
 					fillColor: "blue",
@@ -25,7 +29,7 @@ define(['backbone'], function (Backbone) {
 			var circle = new google.maps.Circle({
 				center: this.options.latlng,
 				radius: this.options.accuracy,
-				map: this.map,
+				map: this.map_obj,
 				fillColor: '#FF6600',
 				fillOpacity: 0.3,
 				strokeColor: '#FFF',
