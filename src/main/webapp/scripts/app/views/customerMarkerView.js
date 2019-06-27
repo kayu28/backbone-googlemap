@@ -9,7 +9,6 @@ define([
 			console.log('[views]customerMarker::initialize...');
 			var _this = this;
 			this.options = options;
-			// this.map = options.map;
 			MarkerView.prototype.constructor.apply(this, arguments);
 			_.bindAll(this, 'render');
 
@@ -28,16 +27,7 @@ define([
 				icon: icon
 			});
 
-			var infoWindow = document.createElement('div');
-			var infoWindowText = document.createElement('div');
-			infoWindowText.id = 'infoWindowText';
-			infoWindowText.innerHTML = this.model.get('name');
-			infoWindow.appendChild(infoWindowText);
-			infoWindow.index = 1;
-			infoWindow.style['padding-bottom'] = '10px';
-			infoWindow.style['width'] = '90%';
-			this.infoWindow = infoWindow;
-
+			this.createInfoWindow();
 			google.maps.event.addListener(this.marker, 'click', function (e) {
 				_this.openInfoWindow(e);
 			});

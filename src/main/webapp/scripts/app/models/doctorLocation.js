@@ -6,7 +6,7 @@ define([
 	console.log('[Model]doctorLocation::loading...');
 	var DoctorLocation = Location.extend({
 		constructor: function () {
-			_.bindAll(this);
+			// _.bindAll(this);
 			Location.prototype.constructor.apply(this, arguments);
 		},
 	});

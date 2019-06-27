@@ -4,7 +4,7 @@ define(['backbone', 'app/models/doctorLocation'], function (Backbone, DoctorLoca
 
 	var DoctorLocationList = Backbone.Collection.extend({
 		model: DoctorLocation,
-		url: env.CONTEXT_PATH + "rest/doctor"
+		url: env.CONTEXT_PATH + "api/doctor"
 	});
 
 	return DoctorLocationList;

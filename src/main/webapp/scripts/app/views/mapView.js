@@ -103,8 +103,6 @@ define([
 				console.log('[views]map::search...');
 				var _this = this;
 				this.searchCriteria = searchCriteria || this.searchCriteria;
-				var pos = this.map_obj.getCenter();
-				var latlng = new google.maps.LatLng(pos.lat(), pos.lng());
 				var customerLocationDfd, doctorLocationDfd, meetingLocationDfd;
 				this.customerLocationCollection = null;
 				this.doctorLocationCollection = null;
@@ -117,13 +115,11 @@ define([
 				}
 				if (this.searchCriteria.get('doctorMode')) {
 					console.log('doctorMode');
-					// TODO
 					this.doctorLocationCollection = new DoctorLocationCollection();
 					doctorLocationDfd = this.doctorLocationCollection.fetch();
 				}
 				if (this.searchCriteria.get('meetingAreaMode')) {
 					console.log('meetingAreaMode');
-
 					this.meetingLocationCollection = new MeetingLocationCollection([], {
 						map_obj: this.map_obj
 					});
@@ -132,14 +128,21 @@ define([
 
 				$.when(customerLocationDfd, doctorLocationDfd, meetingLocationDfd)
 					.done(function (data, textStatus, jqXHR) {
-						console.log('done:' + data);
 						if (_this.markerCollectionView) {
-							_this.markerCollectionView.trigger('resetMeetingLocation', _this.meetingLocationCollection, _this.map_obj);
-							_this.markerCollectionView.trigger('resetCustomerLocation', _this.customerLocationCollection, _this.map_obj);
+							_this.markerCollectionView.trigger(
+								'resetCollectionView',
+								{
+									meetingLocationCollection: _this.meetingLocationCollection,
+									customerLocationCollection: _this.customerLocationCollection,
+									doctorLocationCollection: _this.doctorLocationCollection,
+									map_obj: _this.map_obj
+								}
+							);
 						} else {
 							_this.markerCollectionView = new MarkerCollectionView({
 								meetingCollection: _this.meetingLocationCollection,
 								customerCollection: _this.customerLocationCollection,
+								doctorCollection: _this.doctorLocationCollection,
 								map_obj: _this.map_obj,
 								eventBus: _this.eventBus,
 								el: $("#markerList"),

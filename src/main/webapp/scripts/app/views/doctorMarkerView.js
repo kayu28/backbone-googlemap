@@ -9,7 +9,6 @@ define([
 			console.log('[views]doctorMarker::initialize...');
 			var _this = this;
 			this.options = options;
-			// this.map = options.map;
 			MarkerView.prototype.constructor.apply(this, arguments);
 			_.bindAll(this, 'render');
 
@@ -23,21 +22,12 @@ define([
 
 			this.marker = new google.maps.Marker({
 				map: this.map_obj,
-				position: this.options.latlng,
+				position: this.model.getLatLng(),
 				title: this.model.get('name'),
 				icon: icon
 			});
 
-			var infoWindow = document.createElement('div');
-			var infoWindowText = document.createElement('div');
-			infoWindowText.id = 'infoWindowText';
-			infoWindowText.innerHTML = this.model.get('title');
-			infoWindow.appendChild(infoWindowText);
-			infoWindow.index = 1;
-			infoWindow.style['padding-bottom'] = '10px';
-			infoWindow.style['width'] = '90%';
-			this.infoWindow = infoWindow;
-
+			this.createInfoWindow();
 			google.maps.event.addListener(this.marker, 'click', function (e) {
 				_this.openInfoWindow(e);
 			});

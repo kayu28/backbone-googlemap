@@ -23,6 +23,17 @@ define(['backbone'], function (Backbone) {
 			this.marker.setMap(null);
 			this.remove();
 		},
+		createInfoWindow: function () {
+			var infoWindow = document.createElement('div');
+			var infoWindowText = document.createElement('div');
+			infoWindowText.id = 'infoWindowText';
+			infoWindowText.innerHTML = this.model.get('name');
+			infoWindow.appendChild(infoWindowText);
+			infoWindow.index = 1;
+			infoWindow.style['padding-bottom'] = '10px';
+			infoWindow.style['width'] = '90%';
+			this.infoWindow = infoWindow;
+		},
 		render: function () {
 			// console.log('[views]marker::render...  ');
 			return this;

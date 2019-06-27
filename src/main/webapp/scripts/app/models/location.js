@@ -4,7 +4,7 @@ define(['backbone'], function (Backbone) {
 	var Location = Backbone.Model.extend({
 		constructor: function () {
 			console.log('[model]location::initialize...');
-			_.bindAll(this, 'getLatLng');
+			_.bindAll(this, 'getLatLng', 'getDistance');
 			this.defaults = _.extend({}, {
 				name: "",
 				place_id: "",
@@ -15,6 +15,9 @@ define(['backbone'], function (Backbone) {
 		},
 		getLatLng: function () {
 			return new google.maps.LatLng(this.get("lat"), this.get("lng"));
+		},
+		getDistance: function (centerLatLng) {
+			return google.maps.geometry.spherical.computeDistanceBetween(centerLatLng, this.getLatLng());
 		}
 	});
 	return Location;
