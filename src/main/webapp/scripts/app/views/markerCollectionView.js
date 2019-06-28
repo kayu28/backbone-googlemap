@@ -46,8 +46,8 @@ define([
 			},
 			search: function () {
 				console.log('[views]markerList::search...');
+				this.closeNav();
 				this.eventBus.trigger('searchList', $('#searchCriteria').val());
-				document.getElementById("myNav").style.width = "0%";
 			},
 			closeNav: function () {
 				console.log('[views]markerList::closeNav...');

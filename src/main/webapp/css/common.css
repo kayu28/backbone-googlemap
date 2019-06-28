@@ -56,18 +56,6 @@ div#content {
 	width: 100%;
 }
 
-#infowindow-content .title {
-	font-weight: bold;
-}
-
-#infowindow-content {
-	display: none;
-}
-
-#map #infowindow-content {
-	display: inline;
-}
-
 /* The Overlay (background) */
 
 .overlay {

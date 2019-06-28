@@ -12,7 +12,9 @@ define([
 			this.map_obj = options.map_obj;
 			Backbone.View.prototype.constructor.apply(this, arguments);
 			_.bindAll(this, 'render');
-
+		},
+		render: function () {
+			console.log('[views]userMarker::render...  ');
 			this.userMarker = new google.maps.Marker({
 				position: this.options.latlng,
 				map: this.map_obj,
@@ -35,10 +37,7 @@ define([
 				strokeColor: '#FFF',
 				strokeOpacity: 0
 			});
-			// this.map.fitBounds(circle.getBounds());
-		},
-		render: function () {
-			console.log('[views]userMarker::render...  ');
+
 			return this;
 		},
 	});
