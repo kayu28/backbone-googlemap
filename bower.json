@@ -7,14 +7,18 @@
   ],
   "private": true,
   "dependencies": {
-    "requirejs": "#2.2.0",
-    "text": "requirejs-text#2.0.15",
-    "jquery": "jquery#2.2.4",
-    "bootstrap": "3.2.0",
-    "underscore": "#1.8.3",
-    "backbone": "backbone#1.2.3",
-    "backbone.marionette": "marionette#2.4.7",
+    "requirejs": "2.3.6",
+    "datatables": "1.10.19",
+    "jquery": "3.3.1",
+    "jquery-ui": "1.12.1",
+    "bootstrap": "3.4.1",
+    "underscore": "1.6.0",
+    "backbone": "1.1.2",
+    "backbone.stickit": "0.8.0",
     "geolocation-marker": "#2.0.5",
-    "json2": "*"
+    "fastclick": "1.0.6",
+    "fullcalendar": "4.1.0",
+    "font-awesome": "5.0.6",
+    "eonasdan-bootstrap-datetimepicker": "4.17.47"
   }
 }

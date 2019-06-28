@@ -2,8 +2,8 @@ require.config({
 	baseUrl: 'scripts',
 	paths: {
 		'jquery': '../libs/jquery/dist/jquery.min',
-		'underscore': '../libs/underscore/underscore-min',
-		'backbone': '../libs/backbone/backbone-min',
+		'underscore': '../libs/underscore/underscore',
+		'backbone': '../libs/backbone/backbone',
 		"bootstrap": "../libs/bootstrap/dist/js/bootstrap.min",
 		'hbs': 'require-handlebars-plugin/hbs',
 		'google': 'https://maps.googleapis.com/maps/api/js?key=' + api_key + '&libraries=places&language=jp&region=jp',
